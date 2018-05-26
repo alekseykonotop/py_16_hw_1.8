@@ -8,34 +8,38 @@
 # Должен быть один базовый класс, который наследуют все остальные животные.
 # Базовый класс должен определять общие характеристики и интерфейс.
 
+
 class FarmAnimals:
     location = 'Ферма'
     # housing = None  # для разных типов животных разные корпуса
     animal_count = 0  # Общее колличество животных на ферме
 
-    def __init__(self, name, type):
+    def __init__(self, name, obj_type):
         self.name = name
-        self.type = type
+        self.obj_type = obj_type
         FarmAnimals.animal_count += 1
 
     def present_new_animal(self):
         """Метод сообщает о новом представителе класса."""
-        print('Новое животное на ферме: тип {0}, кличкa {1}'.format(self.type, self.name))
+        print('Новое животное на ферме: тип {0}, кличкa {1}'.format(self.obj_type, self.name))
 
+    @staticmethod
     def report():
         """Метод выводит отчет о численности животных на ферме."""
         print('Всего животных на ферме: ', FarmAnimals.animal_count)
+
 
 # Класс Прупные животные к которым относятся коровы, козы, овца, свиньи
 class LargeAnimals(FarmAnimals):
     housing = '"КРС"'  # Корпус крупного рогатого скота
     count_in_housing = 0
 
-    def __init__(self, name, type):
-        FarmAnimals.__init__(self, name, type)
+    def __init__(self, name, obj_type):
+        FarmAnimals.__init__(self, name, obj_type)
         FarmAnimals.present_new_animal(self)
         LargeAnimals.count_in_housing += 1
 
+    @staticmethod
     def how_many():
         """Выводит общее кол-во представителей класса LargeAnimals."""
         print('В корпусе {0} всего {1} животных'.format(LargeAnimals.housing, LargeAnimals.count_in_housing))
@@ -43,14 +47,15 @@ class LargeAnimals(FarmAnimals):
 
 # Класс Пернатые, в которым относятся куры, гуси, утки
 class FeatheryAnimals(FarmAnimals):
-    housing = '"Пернатые"' # Корпус пернатых животных
+    housing = '"Пернатые"'  # Корпус пернатых животных
     count_in_housing = 0
 
-    def __init__(self, name, type):
-        FarmAnimals.__init__(self, name, type)
+    def __init__(self, name, obj_type):
+        FarmAnimals.__init__(self, name, obj_type)
         FarmAnimals.present_new_animal(self)
         FeatheryAnimals.count_in_housing += 1
 
+    @staticmethod
     def how_many():
         """Выводит общее кол-во животных в корпусе"""
         print('В корпусе {0} всего {1} животных'.format(FeatheryAnimals.housing, FeatheryAnimals.count_in_housing))
